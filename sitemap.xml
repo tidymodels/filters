@@ -5,6 +5,8 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/new_score_obj.html</loc></url>
 <url><loc>/reference/score_aov.html</loc></url>
+<url><loc>/reference/score_roc_auc.html</loc></url>
 </urlset>
 
