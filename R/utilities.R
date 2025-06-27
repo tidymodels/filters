@@ -80,7 +80,6 @@ trans_score.score_obj <- function(x, ...) {
 #'
 #' @export
 filter_score_num <- function(x, ...) {
-  # TODO Rename to filter_num_terms?
   UseMethod("filter_score_num")
 }
 
@@ -107,7 +106,6 @@ filter_score_num.score_obj <- function(x, ..., num_terms, target = NULL) {
 #'
 #' @export
 filter_score_prop <- function(x, ...) {
-  # TODO Rename to filter_num_terms?
   UseMethod("filter_score_prop")
 }
 
@@ -134,7 +132,6 @@ filter_score_prop.score_obj <- function(x, ..., prop_terms, target = NULL) {
 #'
 #' @export
 filter_score_cutoff <- function(x, ...) {
-  # TODO Rename to filter_num_terms?
   UseMethod("filter_score_cutoff")
 }
 
@@ -142,12 +139,12 @@ filter_score_cutoff <- function(x, ...) {
 #' @export
 filter_score_cutoff.score_obj <- function(x, ..., cutoff, target = NULL) {
   if (x$direction == "maximize") {
-    # TODO Can return more # of predictors due to floating-point precision
+    # TODO Can return more # of predictors due to floating-point precision.
     x$res |>
       dplyr::arrange(dplyr::desc(score)) |>
       dplyr::filter(score >= cutoff)
   } else if (x$direction == "minimize") {
-    # TODO Can return less # of predictors due to floating-point precision
+    # TODO Can return less # of predictors due to floating-point precision.
     x$res |> dplyr::arrange(score) |> dplyr::filter(score <= cutoff)
   } else if (x$direction == "target") {
     # TODO This cutoff value is based on abs(score - target). Not ideal?
@@ -160,8 +157,73 @@ filter_score_cutoff.score_obj <- function(x, ..., cutoff, target = NULL) {
 # TODO Filter score based on user input
 # filter_score_<>
 
-# TODO Rank score
-# rank_score
+# COMMENT rank_score_*() below creates an additional column named rank, but can perhaps futher
+# |> filter(rank = )?
+
+#' Rank score based on min_rank (Need a better title)
+#'
+#' @param x NULL
+#'
+#' @param ... NULL
+#'
+#' @export
+rank_score_min <- function(x, ...) {
+  UseMethod("rank_score_min")
+}
+
+#' @noRd
+#' @export
+rank_score_min.score_obj <- function(x, ..., target = NULL) {
+  if (x$direction == "maximize") {
+    x$res |> dplyr::mutate(rank = dplyr::min_rank((dplyr::desc(score))))
+  } else if (x$direction == "minimize") {
+    x$res |> dplyr::mutate(rank = dplyr::min_rank((score)))
+  } # else if (x$direction == "target") { # TODO
+  #   x$res |> dplyr::arrange(abs(score - target))
+  # }
+}
+
+#' Rank score based on dense_rank (Need a better title)
+#'
+#' @param x NULL
+#'
+#' @param ... NULL
+#'
+#' @export
+rank_score_dense <- function(x, ...) {
+  UseMethod("rank_score_dense")
+}
+
+#' @noRd
+#' @export
+rank_score_dense.score_obj <- function(x, ..., target = NULL) {
+  if (x$direction == "maximize") {
+    x$res |> dplyr::mutate(rank = dplyr::dense_rank((dplyr::desc(score))))
+  } else if (x$direction == "minimize") {
+    x$res |> dplyr::mutate(rank = dplyr::dense_rank((score)))
+  } # else if (x$direction == "target") { # TODO
+  #   x$res |> dplyr::arrange(abs(score - target))
+  # }
+}
+
+#' Assign class result_obj to score object score_obj
+#'
+#' @param x NULL
+#'
+#' @param ... NULL
+#'
+#' @export
+as_result_obj <- function(x, ...) {
+  UseMethod("as_result_obj")
+}
+
+#' @noRd
+#' @export
+as_result_obj.score_obj <- function(x, res, ...) {
+  class(res) <- c("result_obj", class(res))
+  x$res <- res # COMMENT This overlaps with attach_score()
+  x
+}
 
 # TODO Bind scores
 # bind_score

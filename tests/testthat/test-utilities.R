@@ -391,3 +391,21 @@ test_that("filter_score_cutoff() is working for aov", {
       dplyr::filter(abs(score - 10.4) <= 1)
   )
 })
+
+# TODO Test rank_score_min()
+
+# TODO Test rank_score_dense()
+
+# res %>%
+#   dplyr::mutate(rank = dplyr::min_rank((dplyr::desc(score))))
+
+# res %>%
+#   dplyr::mutate(rank = dplyr::min_rank((score)))
+
+# res %>%
+#   dplyr::mutate(rank = dplyr::dense_rank((dplyr::desc(score))))
+
+# res %>%
+#   dplyr::mutate(rank = dplyr::dense_rank((score)))
+
+# TODO Test as_result_obj()
