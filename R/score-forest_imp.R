@@ -33,10 +33,11 @@ get_forest_imp_ranger <- function(score_obj, data, outcome) {
     data = data,
     num.trees = score_obj$trees,
     mtry = score_obj$mtry,
-    importance = score_obj$score_type, # TODO importance = c(impurity)
+    importance = score_obj$score_type,
+    # TODO Allow option for importance = c(impurity)
     min.node.size = score_obj$min_n,
     classification = score_obj$class, # TODO There is probably a better way to to do this?
-    seed = 42 # TODO Add this to pass tests. Remove later.
+    seed = 42 # TODO Add this to pass tests. Remove later. set.seed(42) alone does not seem to work.
   )
   imp <- fit$variable.importance
   imp
@@ -50,16 +51,21 @@ get_forest_imp_partykit <- function(score_obj, data, formula) {
     ntree = score_obj$trees,
     mtry = score_obj$mtry,
   )
-  imp <- partykit::varimp(fit, conditional = TRUE) # TODO Allow option for conditional = FALSE
+  imp <- partykit::varimp(fit, conditional = TRUE)
+  # TODO Allow option for conditional = FALSE
 }
 
 get_forest_imp_aorsf <- function(score_obj, data, formula) {
+  if (score_obj$score_type == "permutation") {
+    importance_type = "permute"
+  } # TODO Allow option for importance = c("none", "anova", "negate")
+
   fit <- aorsf::orsf(
     formula = formula,
     data = data,
     n_tree = score_obj$trees,
     n_retry = score_obj$mtry,
-    importance = "permute" # TODO Allow option for importance = c("none", "anova", "negate")
+    importance = importance_type
   )
   imp <- fit$importance # orsf_vi_permute(fit)
   imp
@@ -73,6 +79,8 @@ make_scores_forest_importance <- function(
 ) {
   score <- imp[predictors] |> unname()
   score[is.na(score)] <- 0
+
+  # TODO Have name = c(permutation_ranger, permutation_partykit, permutation_aorsf) based on score_obj$engine.
 
   res <- dplyr::tibble(
     name = score_type,
@@ -101,7 +109,7 @@ get_scores_forest_importance <- function(
     imp <- get_forest_imp_aorsf(score_obj, data, formula)
   }
   res <- make_scores_forest_importance(
-    score_obj$score_type, # TODO Have score_type = c(perm_ranger, perm_partykit, perm_aorsf).
+    score_obj$score_type,
     imp,
     outcome,
     predictors
