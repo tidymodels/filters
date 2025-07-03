@@ -7,6 +7,8 @@
 <url><loc>/reference/arrange_score.html</loc></url>
 <url><loc>/reference/attach_score.html</loc></url>
 <url><loc>/reference/bind_scores.html</loc></url>
+<url><loc>/reference/fill_safe_values.html</loc></url>
+<url><loc>/reference/filter_score_auto.html</loc></url>
 <url><loc>/reference/filter_score_cutoff.html</loc></url>
 <url><loc>/reference/filter_score_num.html</loc></url>
 <url><loc>/reference/filter_score_prop.html</loc></url>
@@ -17,5 +19,7 @@
 <url><loc>/reference/score_aov.html</loc></url>
 <url><loc>/reference/score_roc_auc.html</loc></url>
 <url><loc>/reference/trans_score.html</loc></url>
+<url><loc>/reference/transform_abs.html</loc></url>
+<url><loc>/reference/transform_neg_log10.html</loc></url>
 </urlset>
 

@@ -76,15 +76,19 @@
 
 
 <dl><dt id="arg-subclass">subclass<a class="anchor" aria-label="anchor" href="#arg-subclass"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A character string.</p></dd>
 
 
 <dt id="arg-outcome-type">outcome_type<a class="anchor" aria-label="anchor" href="#arg-outcome-type"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A character string. One of:</p><ul><li><p><code>"numeric"</code></p></li>
+<li><p><code>"factor"</code></p></li>
+</ul></dd>
 
 
 <dt id="arg-predictor-type">predictor_type<a class="anchor" aria-label="anchor" href="#arg-predictor-type"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A character string. One of:</p><ul><li><p><code>"numeric"</code></p></li>
+<li><p><code>"factor"</code></p></li>
+</ul></dd>
 
 
 <dt id="arg-case-weights">case_weights<a class="anchor" aria-label="anchor" href="#arg-case-weights"></a></dt>
@@ -92,23 +96,29 @@
 
 
 <dt id="arg-range">range<a class="anchor" aria-label="anchor" href="#arg-range"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A numeric vector of length two, specifying the minimum and maximum
+possible values, respectively.</p></dd>
 
 
 <dt id="arg-inclusive">inclusive<a class="anchor" aria-label="anchor" href="#arg-inclusive"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A logical vector of length two, indicating whether the lower and
+upper bounds of the range are inclusive (<code>TRUE</code>) or exclusive (<code>FALSE</code>), respectively.</p></dd>
 
 
 <dt id="arg-fallback-value">fallback_value<a class="anchor" aria-label="anchor" href="#arg-fallback-value"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A numeric scalar used as a fallback value. Typical values
+include: <code>0</code>, <code>1</code>, or <code>Inf</code>.</p></dd>
 
 
 <dt id="arg-score-type">score_type<a class="anchor" aria-label="anchor" href="#arg-score-type"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A character string.</p></dd>
 
 
 <dt id="arg-trans">trans<a class="anchor" aria-label="anchor" href="#arg-trans"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A <code>trans</code> object from the <span class="pkg">scales</span> package, such as
+<code><a href="https://scales.r-lib.org/reference/transform_log.html" class="external-link">scales::transform_log10()</a></code> or <code><a href="https://scales.r-lib.org/reference/transform_reciprocal.html" class="external-link">scales::transform_reciprocal()</a></code>. Or use built-in
+functions, such as <code><a href="transform_abs.html">transform_abs()</a></code> or <code><a href="transform_neg_log10.html">transform_neg_log10()</a></code>.
+Create custom transforms with <code><a href="https://scales.r-lib.org/reference/new_transform.html" class="external-link">scales::trans_new()</a></code>.</p></dd>
 
 
 <dt id="arg-sorts">sorts<a class="anchor" aria-label="anchor" href="#arg-sorts"></a></dt>
@@ -116,19 +126,25 @@
 
 
 <dt id="arg-direction">direction<a class="anchor" aria-label="anchor" href="#arg-direction"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A character string. One of:</p><ul><li><p><code>"maximize"</code></p></li>
+<li><p><code>"minimize"</code></p></li>
+<li><p><code>"target"</code></p></li>
+</ul></dd>
 
 
 <dt id="arg-deterministic">deterministic<a class="anchor" aria-label="anchor" href="#arg-deterministic"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A logical value, indicating whether the resulting score is
+deterministic (<code>TRUE</code>) or random (<code>FALSE</code>).</p></dd>
 
 
 <dt id="arg-tuning">tuning<a class="anchor" aria-label="anchor" href="#arg-tuning"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A logical value, indicating whether the model should be tuned
+(<code>TRUE</code>) or not (<code>FALSE</code>).</p></dd>
 
 
 <dt id="arg-ties">ties<a class="anchor" aria-label="anchor" href="#arg-ties"></a></dt>
-<dd><p>NULL</p></dd>
+<dd><p>A logical value indicating whether ties in score can occur (<code>TRUE</code>)
+or not (<code>FALSE</code>).</p></dd>
 
 
 <dt id="arg-calculating-fn">calculating_fn<a class="anchor" aria-label="anchor" href="#arg-calculating-fn"></a></dt>
