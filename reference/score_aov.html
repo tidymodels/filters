@@ -5,7 +5,7 @@ Output a score object containing associated metadata such as range, fallback_val
 score_type ("fstat" or "pval"), direction, and other relevant attributes.'><meta property="og:description" content='Construct a score object containing metadata for univariate feature scoring using the
 ANOVA F-test.
 Output a score object containing associated metadata such as range, fallback_value,
-score_type ("fstat" or "pval"), direction, and other relevant attributes.'><script defer data-domain="filtro.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+score_type ("fstat" or "pval"), direction, and other relevant attributes.'><script defer data-domain="tidymodels.github.io/filtro,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -101,8 +101,8 @@ the <code>direction</code> should be <code>"maximize"</code>.</p></dd>
 <span class="r-in"><span><span class="fu">score_aov</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ANOVA F-test F-statistics and p-values</span>
 <span class="r-in"><span><span class="co"># Change score type</span></span></span>
-<span class="r-in"><span><span class="va">score_obj</span> <span class="op">&lt;-</span> <span class="fu">score_aov</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">score_obj</span><span class="op">$</span><span class="va">score_type</span> <span class="op">&lt;-</span> <span class="st">"pval"</span></span></span>
+<span class="r-in"><span><span class="fu">score_aov</span><span class="op">(</span>score_type <span class="op">=</span> <span class="st">"pval"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ANOVA F-test F-statistics and p-values</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

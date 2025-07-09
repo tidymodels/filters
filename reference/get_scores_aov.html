@@ -5,7 +5,7 @@ Output a tibble result with with one row per predictor, and four columns:
 name, score, predictor, and outcome."><meta property="og:description" content="Evaluate the relationship between a numeric outcome and a categorical predictor,
 or vice versa, by computing the ANOVA F-statistic or p-value.
 Output a tibble result with with one row per predictor, and four columns:
-name, score, predictor, and outcome."><script defer data-domain="filtro.tidymodels.org,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+name, score, predictor, and outcome."><script defer data-domain="tidymodels.github.io/filtro,all.tidymodels.org" src="https://plausible.io/js/plausible.js"></script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -91,7 +91,7 @@ transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <cod
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ames</span>, package <span class="op">=</span> <span class="st">"modeldata"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">modeldata</span><span class="fu">::</span><span class="va"><a href="https://modeldata.tidymodels.org/reference/ames.html" class="external-link">ames</a></span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="va">ames_subset</span> <span class="op">&lt;-</span> <span class="fu">modeldata</span><span class="fu">::</span><span class="va"><a href="https://modeldata.tidymodels.org/reference/ames.html" class="external-link">ames</a></span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="va">Sale_Price</span>,</span></span>
 <span class="r-in"><span>    <span class="va">MS_SubClass</span>,</span></span>
@@ -100,11 +100,13 @@ transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <cod
 <span class="r-in"><span>    <span class="va">Lot_Area</span>,</span></span>
 <span class="r-in"><span>    <span class="va">Street</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Define outcome</span></span></span>
-<span class="r-in"><span><span class="va">outcome</span> <span class="op">&lt;-</span> <span class="st">"Sale_Price"</span></span></span>
 <span class="r-in"><span><span class="co"># Create a score object</span></span></span>
 <span class="r-in"><span><span class="va">score_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="score_aov.html">score_aov</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span><span class="va">score_obj</span>, <span class="va">data</span>, <span class="va">outcome</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">score_obj</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ames_subset</span>,</span></span>
+<span class="r-in"><span>  outcome <span class="op">=</span> <span class="st">"Sale_Price"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">score_res</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name  score outcome    predictor   </span>
@@ -115,8 +117,12 @@ transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <cod
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> fstat  <span style="color: #BB0000;">NA</span>   Sale_Price Lot_Area    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fstat  10.4 Sale_Price Street      </span>
 <span class="r-in"><span><span class="co"># Change score type</span></span></span>
-<span class="r-in"><span><span class="va">score_obj</span><span class="op">$</span><span class="va">score_type</span> <span class="op">&lt;-</span> <span class="st">"pval"</span></span></span>
-<span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span><span class="va">score_obj</span>, <span class="va">data</span>, <span class="va">outcome</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">score_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="score_aov.html">score_aov</a></span><span class="op">(</span>score_type <span class="op">=</span> <span class="st">"pval"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">score_obj</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ames_subset</span>,</span></span>
+<span class="r-in"><span>  outcome <span class="op">=</span> <span class="st">"Sale_Price"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">score_res</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name   score outcome    predictor   </span>
@@ -127,11 +133,17 @@ transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <cod
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> pval   <span style="color: #BB0000;">NA</span>    Sale_Price Lot_Area    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> pval    2.90 Sale_Price Street      </span>
 <span class="r-in"><span><span class="co"># Use raw p-values instead of -log10(p-values)</span></span></span>
-<span class="r-in"><span><span class="va">score_obj</span><span class="op">$</span><span class="va">score_type</span> <span class="op">&lt;-</span> <span class="st">"pval"</span></span></span>
-<span class="r-in"><span><span class="va">score_obj</span><span class="op">$</span><span class="va">neg_log10</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></span>
-<span class="r-in"><span><span class="va">score_obj</span><span class="op">$</span><span class="va">direction</span> <span class="op">&lt;-</span> <span class="st">"minimize"</span></span></span>
-<span class="r-in"><span><span class="va">score_obj</span><span class="op">$</span><span class="va">fallback_value</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
-<span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span><span class="va">score_obj</span>, <span class="va">data</span>, <span class="va">outcome</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">score_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="score_aov.html">score_aov</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  score_type <span class="op">=</span> <span class="st">"pval"</span>,</span></span>
+<span class="r-in"><span>  direction <span class="op">=</span> <span class="st">"minimize"</span>,</span></span>
+<span class="r-in"><span>  fallback_value <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">score_obj</span><span class="op">$</span><span class="va">neg_log10</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span> <span class="co"># TODO Set neg_log10 = FALSE in score_aov()?</span></span></span>
+<span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">score_obj</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">ames_subset</span>,</span></span>
+<span class="r-in"><span>  outcome <span class="op">=</span> <span class="st">"Sale_Price"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">score_res</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name       score outcome    predictor   </span>
