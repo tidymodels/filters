@@ -34,10 +34,7 @@
 #'    - Random Forest:`"imp_rf"`, `"imp_rf_conditional"`, `"imp_rf_oblique"`
 #'    - Information Gain: `"infogain"`, `"gainratio"`, `"symuncert"`
 #'    - ROC AUC: `"roc_auc"`
-#' @param trans An optional `trans` object from the \pkg{scales} package, such as
-#' [scales::transform_log10()] or [scales::transform_reciprocal()]. Use built-in
-#' functions, such as [filtro::transform_abs()] or [filtro::transform_neg_log10()].
-#' Or create custom transforms with [scales::trans_new()].
+#' @param trans Currently not used.
 #' @param sorts An optional function used to sort the scores. Common options include:
 #'  - `identity`
 #'  - `abs`
@@ -55,12 +52,14 @@
 #' @param calculating_fn An optional function used to compute the score. A default function
 #' is selected based on the `score_type`.
 #' @param label A named character string that can be used for printing and plotting.
-#' @param ... NULL
+#' @param ... Currently not used.
 #'
-#' @returns NULL
+#' @returns A score object.
 #' @export
 #'
-#' @examples NULL
+#' @examples
+#' # Create a score object
+#' new_score_obj()
 new_score_obj <- function(
   subclass = c("cat_num", "cat_cat", "num_num", "any"), # TODO Rename subclass
   outcome_type = c("numeric", "factor"),
