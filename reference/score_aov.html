@@ -68,14 +68,14 @@ possible values, respectively.</p></dd>
 <dd><p>A numeric scalar used as a fallback value. Typical values
 include:</p><ul><li><p><code>0</code></p></li>
 <li><p><code>Inf</code> (default)</p></li>
-</ul><p>For F-statistics, the <code>fallback_value</code> should be <code>"Inf"</code>. For p-values,
+</ul><p>For F-statistics, the <code>fallback_value</code> is <code>"Inf"</code>. For p-values,
 since the default applies a negative log10 transformation to p-values,
-the <code>fallback_value</code> should be <code>"Inf"</code>.</p></dd>
+the <code>fallback_value</code> is <code>"Inf"</code>.</p></dd>
 
 
 <dt id="arg-score-type">score_type<a class="anchor" aria-label="anchor" href="#arg-score-type"></a></dt>
 <dd><p>A character string indicating the type of scoring metric to compute.
-Available options include:</p><ul><li><p><code>"fstat"</code></p></li>
+Available options include:</p><ul><li><p><code>"fstat"</code> (default)</p></li>
 <li><p><code>"pval"</code></p></li>
 </ul></dd>
 
@@ -84,9 +84,9 @@ Available options include:</p><ul><li><p><code>"fstat"</code></p></li>
 <dd><p>A character string indicating the optimization direction. One of:</p><ul><li><p><code>"maximize"</code> (default)</p></li>
 <li><p><code>"minimize"</code></p></li>
 <li><p><code>"target"</code></p></li>
-</ul><p>For F-statistics, the <code>direction</code> should be <code>"maximize"</code>. For p-values,
+</ul><p>For F-statistics, the <code>direction</code> is <code>"maximize"</code>. For p-values,
 since the default applies a negative log10 transformation to p-values,
-the <code>direction</code> should be <code>"maximize"</code>.</p></dd>
+the <code>direction</code> is <code>"maximize"</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

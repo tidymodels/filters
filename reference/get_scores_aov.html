@@ -47,7 +47,7 @@ Output a tibble result with with one row per predictor, and four columns:
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_scores_aov</span><span class="op">(</span><span class="va">score_obj</span>, <span class="va">data</span>, <span class="va">outcome</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_scores_aov</span><span class="op">(</span><span class="va">score_obj</span>, <span class="va">data</span>, <span class="va">outcome</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,6 +65,10 @@ Output a tibble result with with one row per predictor, and four columns:
 <dt id="arg-outcome">outcome<a class="anchor" aria-label="anchor" href="#arg-outcome"></a></dt>
 <dd><p>A character string specifying the name of the outcome variable.</p></dd>
 
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>NULL</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -77,8 +81,8 @@ Output a tibble result with with one row per predictor, and four columns:
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <code>score_obj</code> object may include the following components:</p><dl><dt><code>neg_log10</code></dt>
 <dd><p>A logical value indicating whether to apply a negative log10
-transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <code>TRUE</code>, p-values are transformed as <code>-log10(pval)</code>. In this case:</p><ul><li><p>The default <code>fallback_value</code> is <code>Inf</code></p></li>
-<li><p>The default <code>direction</code> is <code>"maximize"</code></p></li>
+transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <code>TRUE</code>, p-values are transformed as <code>-log10(pval)</code>. In this case:</p><ul><li><p>The <code>fallback_value</code> is <code>Inf</code> (default)</p></li>
+<li><p>The <code>direction</code> is <code>"maximize"</code> (default)</p></li>
 </ul></li>
 <li><p>If <code>FALSE</code>, raw p-values are used. In this case:</p><ul><li><p>The <code>fallback_value</code> should be set to <code>0</code></p></li>
 <li><p>The <code>direction</code> should be set to <code>"minimize"</code></p></li>
@@ -100,7 +104,7 @@ transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <cod
 <span class="r-in"><span>    <span class="va">Lot_Area</span>,</span></span>
 <span class="r-in"><span>    <span class="va">Street</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Create a score object</span></span></span>
+<span class="r-in"><span><span class="co"># Return score as F-statistics</span></span></span>
 <span class="r-in"><span><span class="va">score_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="score_aov.html">score_aov</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">score_obj</span>,</span></span>
@@ -116,7 +120,7 @@ transformation to p-values (default is <code>TRUE</code>).</p><ul><li><p>If <cod
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> fstat  <span style="color: #BB0000;">NA</span>   Sale_Price Lot_Frontage</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> fstat  <span style="color: #BB0000;">NA</span>   Sale_Price Lot_Area    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fstat  10.4 Sale_Price Street      </span>
-<span class="r-in"><span><span class="co"># Change score type</span></span></span>
+<span class="r-in"><span><span class="co"># Return score as p-values</span></span></span>
 <span class="r-in"><span><span class="va">score_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="score_aov.html">score_aov</a></span><span class="op">(</span>score_type <span class="op">=</span> <span class="st">"pval"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">score_res</span> <span class="op">&lt;-</span> <span class="fu">get_scores_aov</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">score_obj</span>,</span></span>
