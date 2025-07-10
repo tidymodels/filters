@@ -52,29 +52,43 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of filtro is to …</p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>The goal of <code>filtro</code> is to apply filter-based supervised feature selection methods. These methods score feature relevance using metrics such as p-values, correlation, and importance scores. This package offers tools to score, rank, and select top features using built-in functions and the <a href="https://desirability2.tidymodels.org" class="external-link">desirability2</a> package, and supports streamlined preprocessing on its own or within tidymodels workflows like the <a href="https://recipes.tidymodels.org" class="external-link">recipes</a> package.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of filtro like so:</p>
+<p>You can install the released version of filtro from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># FILL THIS IN! </span></span></code></pre></div>
+<p>You can install the development version from Github with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># FILL THIS IN! </span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="a-scoring-example">A scoring example<a class="anchor" aria-label="anchor" href="#a-scoring-example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.github.io/filtro">filtro</a></span><span class="op">)</span></span>
-<span><span class="co">## basic example code</span></span></code></pre></div>
-<p>What is special about using <code>README.Rmd</code> instead of just <code>README.md</code>? You can include R chunks like so:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></span></code></pre></div>
-<p>You’ll still need to render <code>README.Rmd</code> regularly, to keep <code>README.md</code> up-to-date. <code>devtools::build_readme()</code> is handy for this.</p>
-<p>You can also embed plots, for example:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">pressure</span><span class="op">)</span></span></code></pre></div>
-<p>In that case, don’t forget to commit and push the resulting figure files, so they display on GitHub and CRAN.</p>
+</div>
+<div class="section level2">
+<h2 id="a-filtering-exmple-using-a-single-score">A filtering exmple using a single score<a class="anchor" aria-label="anchor" href="#a-filtering-exmple-using-a-single-score"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="a-filtering-example-using-multiple-scores">A filtering example using multiple scores<a class="anchor" aria-label="anchor" href="#a-filtering-example-using-multiple-scores"></a>
+</h2>
+</div>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>Please note that the filtro project is released with a <a href="https://filtro.tidymodels.org/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<ul>
+<li><p>For questions and discussions about tidymodels packages, modeling, and machine learning, please <a href="https://forum.posit.co/new-topic?category_id=15&amp;tags=tidymodels,question" class="external-link">post on Posit Community</a>.</p></li>
+<li><p>If you think you have encountered a bug, please <a href="https://github.com/tidymodels/filtro/issues" class="external-link">submit an issue</a>.</p></li>
+<li><p>Either way, learn how to create and share a <a href="https://reprex.tidyverse.org/articles/articles/learn-reprex.html" class="external-link">reprex</a> (a minimal, reproducible example), to clearly communicate about your code.</p></li>
+<li><p>Check out further details on <a href="https://www.tidymodels.org/contribute/" class="external-link">contributing guidelines for tidymodels packages</a> and <a href="https://www.tidymodels.org/help/" class="external-link">how to get help</a>.</p></li>
+</ul>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -116,10 +130,10 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/tidymodels/filtro/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/tidymodels/filtro/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/tidymodels/filtro" class="external-link"><img src="https://codecov.io/gh/tidymodels/filtro/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://CRAN.R-project.org/package=filtro" class="external-link"><img src="https://www.r-pkg.org/badges/version/filtro" alt="CRAN status"></a></li>
-<li><a href="https://github.com/franceslinyc/filtro/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/franceslinyc/filtro/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/franceslinyc/filtro" class="external-link"><img src="https://codecov.io/gh/franceslinyc/filtro/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
 
