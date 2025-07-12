@@ -30,26 +30,6 @@ or vice versa, by computing the ANOVA F-statistic or p-value.
 Output a tibble result with with one row per predictor, and four columns:
 \code{name}, \code{score}, \code{predictor}, and \code{outcome}.
 }
-\details{
-The \code{score_obj} object may include the following components:
-\describe{
-\item{\code{neg_log10}}{A logical value indicating whether to apply a negative log10
-transformation to p-values (default is \code{TRUE}).
-\itemize{
-\item If \code{TRUE}, p-values are transformed as \code{-log10(pval)}. In this case:
-\itemize{
-\item The \code{fallback_value} is \code{Inf} (default)
-\item The \code{direction} is \code{"maximize"} (default)
-}
-\item If \code{FALSE}, raw p-values are used. In this case:
-\itemize{
-\item The \code{fallback_value} should be set to \code{0}
-\item The \code{direction} should be set to \code{"minimize"}
-}
-}
-}
-}
-}
 \examples{
 data(ames, package = "modeldata")
 ames_subset <- modeldata::ames |>
@@ -77,13 +57,13 @@ score_res <- get_scores_aov(
   outcome = "Sale_Price"
 )
 score_res
-# Use raw p-values instead of -log10(p-values)
+# Return raw p-values instead of -log10(p-values)
 score_obj <- score_aov(
   score_type = "pval",
+  neg_log10 = FALSE,
   direction = "minimize",
   fallback_value = 0
 )
-score_obj$neg_log10 <- FALSE # TODO Set neg_log10 = FALSE in score_aov()?
 score_res <- get_scores_aov(
   score_obj,
   data = ames_subset,

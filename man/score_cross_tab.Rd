@@ -5,24 +5,87 @@
 \title{Create a score object for cross tabulation p-values}
 \usage{
 score_cross_tab(
-  range = c(0, 1),
-  trans = NULL,
+  range = c(0, Inf),
+  fallback_value = Inf,
   score_type = "pval_chisq",
-  direction = "minimize"
+  direction = "maximize",
+  neg_log10 = TRUE,
+  fdr = FALSE
 )
 }
 \arguments{
-\item{range}{NULL}
+\item{range}{A numeric vector of length two, specifying the minimum and maximum
+possible values, respectively.}
 
-\item{trans}{NULL}
+\item{fallback_value}{A numeric scalar used as a fallback value. One of:
+\itemize{
+\item \code{0}
+\item \code{Inf} (default)
+}
 
-\item{score_type}{NULL}
+For p-values,
+since the default applies a negative log10 transformation to p-values,
+the \code{fallback_value} is \code{"Inf"}.}
 
-\item{direction}{NULL}
+\item{score_type}{A character string indicating the type of scoring metric to compute.
+One of:
+\itemize{
+\item \code{"pval_chisq"} (default)
+\item \code{"pval_fisher"}
+}}
+
+\item{direction}{A character string indicating the optimization direction. One of:
+\itemize{
+\item \code{"maximize"} (default)
+\item \code{"minimize"}
+\item \code{"target"}
+}
+
+For p-values,
+since the default applies a negative log10 transformation to p-values,
+the \code{direction} is \code{"maximize"}.}
+
+\item{neg_log10}{A logical value indicating whether to apply a negative log10
+transformation to p-values. One of:
+\itemize{
+\item \code{TRUE} (default)
+\item \code{FALSE}
+}
+
+If \code{TRUE}, p-values are transformed as \code{-log10(pval)}. In this case:
+\itemize{
+\item The \code{fallback_value} is \code{Inf} (default)
+\item The \code{direction} is \code{"maximize"} (default)
+}
+
+If \code{FALSE}, raw p-values are used. In this case:
+\itemize{
+\item The \code{fallback_value} needs to be set to \code{0}
+\item The \code{direction} needs to be set to \code{"minimize"}
+}}
+
+\item{fdr}{NULL}
+}
+\value{
+A score object containing associated metadata such as \code{range}, \code{fallback_value},
+\code{score_type} (\code{"pval_chisq"} or \code{"pval_fisher"}), \code{direction}, and other relevant attributes.
 }
 \description{
-Create a score object for cross tabulation p-values
+Construct a score object containing metadata for univariate feature scoring using
+Fisher’s exact test and the chi-squared test.
+Output a score object containing associated metadata such as \code{range}, \code{fallback_value},
+\code{score_type} (\code{"pval_chisq"} or \code{"pval_fisher"}), \code{direction}, and other relevant attributes.
 }
 \examples{
-NULL
+# Create a score object
+score_cross_tab()
+# Change score type to use -log10(p-values) fisher's
+score_cross_tab(score_type = "pval_fisher")
+# Change score type to use raw p-values fisher's
+score_cross_tab(
+  score_type = "pval_fisher",
+  neg_log10 = FALSE,
+  direction = "minimize",
+  fallback_value = 0
+)
 }

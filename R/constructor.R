@@ -3,12 +3,6 @@
 #' Output a new score object that contains associated metadata, such as `range`,
 #' `fallback_value`, `score_type`, `direction`, and other relevant attributes.
 #'
-#' @param subclass A character string indicating the type of predictor-outcome combination
-#' the scoring method supports. One of:
-#'  - `"cat_num"`
-#'  - `"cat_cat"`
-#'  - `"num_num"`
-#'  - `"any"`
 #' @param outcome_type A character string indicating the outcome type. One of:
 #'  - `"numeric"`
 #'  - `"factor"`
@@ -52,7 +46,6 @@
 #' @param calculating_fn An optional function used to compute the score. A default function
 #' is selected based on the `score_type`.
 #' @param label A named character string that can be used for printing and plotting.
-#' @param ... NULL
 #'
 #' @returns A score object containing associated metadata such as `range`, `fallback_value`,
 #' `score_type`, `direction`, and other relevant attributes.
@@ -61,46 +54,29 @@
 #' @examples
 #' # Create a score object
 #' new_score_obj()
-new_score_obj <- function(
-  subclass = c("cat_num", "cat_cat", "num_num", "any"), # TODO Rename subclass
-  outcome_type = c("numeric", "factor"),
-  predictor_type = c("numeric", "factor"),
-  case_weights = NULL,
-  range = NULL,
-  inclusive = NULL,
-  fallback_value = NULL,
-  score_type = NULL,
-  trans = NULL,
-  sorts = NULL,
-  direction = NULL,
-  deterministic = NULL,
-  tuning = NULL,
-  ties = NULL,
-  calculating_fn = NULL,
-  label = NULL,
-  ...
-) {
-  # TODO Include validators here
-  # TODO Add a validator to make sure subclass has to be in num_num, cat_num, cat_cat, any
-
-  res <- list(
-    outcome_type = outcome_type,
-    predictor_type = predictor_type,
-    case_weights = case_weights,
-    range = range,
-    inclusive = inclusive,
-    fallback_value = fallback_value,
-    score_type = score_type,
-    trans = trans,
-    sorts = sorts,
-    direction = direction,
-    deterministic = deterministic,
-    tuning = tuning,
-    ties = ties,
-    calculating_fn = calculating_fn,
-    label = label
+new_score_obj <- S7::new_class(
+  "new_score_obj",
+  properties = list(
+    outcome_type = S7::new_property(
+      S7::class_character,
+      default = c("numeric", "factor")
+    ),
+    predictor_type = S7::new_property(
+      S7::class_character,
+      default = c("numeric", "factor")
+    ),
+    case_weights = S7::class_logical,
+    range = S7::class_numeric,
+    inclusive = S7::class_logical,
+    fallback_value = S7::class_numeric,
+    score_type = S7::class_character,
+    trans = S7::class_function,
+    sorts = S7::class_function,
+    direction = S7::class_character,
+    deterministic = S7::class_logical,
+    tuning = S7::class_logical,
+    ties = S7::class_logical,
+    calculating_fn = S7::class_function,
+    label = S7::class_character
   )
-  class(res) <- c(subclass, "score_obj")
-
-  res
-}
+)

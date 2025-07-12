@@ -6,11 +6,10 @@
 #' `score_type` (`"pearson"` or `"spearman"`), `direction`, and other relevant attributes.
 #'
 #' @inheritParams new_score_obj
-#' @param fallback_value A numeric scalar used as a fallback value. Typical values
-#' include:
+#' @param fallback_value A numeric scalar used as a fallback value. One of:
 #'    - `1` (default)
 #' @param score_type A character string indicating the type of scoring metric to compute.
-#' Available options include:
+#' One of:
 #'    - `"pearson"` (default)
 #'    - `"spearman"`
 #' @param direction A character string indicating the optimization direction. One of:
@@ -34,26 +33,21 @@ score_cor <- function(
   score_type = "pearson",
   direction = "maximize"
 ) {
-  #fallback_value <- rlang::arg_match0(fallback_value, c(0, Inf))
-  score_type <- rlang::arg_match0(score_type, c("pearson", "spearman"))
-  direction <- rlang::arg_match0(direction, c("maximize", "minimize", "target"))
-
   new_score_obj(
-    subclass = c("num_num"),
     outcome_type = "numeric",
     predictor_type = "numeric",
-    case_weights = FALSE, # TODO
+    case_weights = FALSE,
     range = range,
     inclusive = c(TRUE, TRUE),
     fallback_value = fallback_value,
     score_type = score_type,
-    trans = NULL, # TODO
-    sorts = NULL, # TODO
+    #trans = # Cannot set NULL. Otherwise S7 complains
+    #sorts =
     direction = direction,
     deterministic = TRUE,
     tuning = FALSE,
-    ties = NULL,
-    calculating_fn = NULL,
+    #ties =
+    calculating_fn = function(x) {}, # Otherwise S7 complains
     label = c(score_cor = "Correlation scores")
   )
 }
@@ -138,18 +132,18 @@ make_scores_cor <- function(score_type, score, outcome, predictors) {
 #' )
 #' score_res
 get_scores_cor <- function(score_obj, data, outcome) {
-  if (score_obj$score_type == "pearson") {
-    score_obj$calculating_fn <- get_single_pearson
-  } else if (score_obj$score_type == "spearman") {
-    score_obj$calculating_fn <- get_single_spearman
+  if (score_obj@score_type == "pearson") {
+    score_obj@calculating_fn <- get_single_pearson
+  } else if (score_obj@score_type == "spearman") {
+    score_obj@calculating_fn <- get_single_spearman
   }
   predictors <- setdiff(names(data), outcome)
 
   score <- purrr::map_dbl(
     purrr::set_names(predictors),
-    \(x) map_score_cor(data, x, outcome, score_obj$calculating_fn)
+    \(x) map_score_cor(data, x, outcome, score_obj@calculating_fn)
   )
 
-  res <- make_scores_cor(score_obj$score_type, score, outcome, predictors)
+  res <- make_scores_cor(score_obj@score_type, score, outcome, predictors)
   res
 }

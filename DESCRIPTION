@@ -20,10 +20,11 @@ Imports:
     pROC,
     purrr,
     rlang (>= 1.1.0),
+    S7,
     scales,
     stats,
     tibble,
-    tidyr    
+    tidyr
 Suggests: 
     aorsf,
     FSelectorRcpp,

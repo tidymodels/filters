@@ -6,23 +6,49 @@
 \usage{
 score_info_gain(
   range = c(0, Inf),
-  trans = NULL,
+  fallback_value = Inf,
   score_type = "infogain",
-  direction = "maximize"
+  direction = "maximize",
+  equal = FALSE
 )
 }
 \arguments{
-\item{range}{NULL}
+\item{range}{A numeric vector of length two, specifying the minimum and maximum
+possible values, respectively.}
 
-\item{trans}{NULL}
+\item{fallback_value}{A numeric scalar used as a fallback value. One of:
+\itemize{
+\item \code{1}
+\item \code{Inf} (default)
+}}
 
-\item{score_type}{NULL}
+\item{score_type}{A character string indicating the type of scoring metric to compute.
+One of:
+\itemize{
+\item \code{"infogain"} (default)
+\item \code{"gainratio"}
+\item \code{"symuncert"}
+}}
 
-\item{direction}{NULL}
+\item{direction}{A character string indicating the optimization direction. One of:
+\itemize{
+\item \code{"maximize"} (default)
+\item \code{"minimize"}
+\item \code{"target"}
+}}
+
+\item{equal}{NULL}
+}
+\value{
+A score object containing associated metadata such as \code{range}, \code{fallback_value},
+\code{score_type} (), \code{direction}, and other relevant attributes.
 }
 \description{
-Create a score object for information gain
+Construct a score object containing metadata for univariate feature scoring using
+information gain.
+Output a score object containing associated metadata such as \code{range}, \code{fallback_value},
+\code{score_type} (), \code{direction}, and other relevant attributes.
 }
 \examples{
-NULL
+score_info_gain()
 }

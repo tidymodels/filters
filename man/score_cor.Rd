@@ -15,14 +15,13 @@ score_cor(
 \item{range}{A numeric vector of length two, specifying the minimum and maximum
 possible values, respectively.}
 
-\item{fallback_value}{A numeric scalar used as a fallback value. Typical values
-include:
+\item{fallback_value}{A numeric scalar used as a fallback value. One of:
 \itemize{
 \item \code{1} (default)
 }}
 
 \item{score_type}{A character string indicating the type of scoring metric to compute.
-Available options include:
+One of:
 \itemize{
 \item \code{"pearson"} (default)
 \item \code{"spearman"}

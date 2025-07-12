@@ -7,14 +7,62 @@
 get_scores_cross_tab(score_obj, data, outcome, ...)
 }
 \arguments{
-\item{score_obj}{NULL}
+\item{score_obj}{A score object. See \code{\link[=score_cross_tab]{score_cross_tab()}} for details.}
 
-\item{data}{NULL}
+\item{data}{A data frame or tibble containing the outcome and predictor variables.}
 
-\item{outcome}{NULL}
+\item{outcome}{A character string specifying the name of the outcome variable.}
 
 \item{...}{NULL}
 }
+\value{
+A tibble of result with one row per predictor, and four columns:
+\itemize{
+\item \code{name}: the name of scoring metric.
+\item \code{score}: the score for the predictor-outcome pair.
+\item \code{predictor}: the name of the predictor.
+\item \code{outcome}: the name of the outcome.
+}
+}
 \description{
-Compute cross tabulation p-value scores using Fisher’s exact test and the chi-squared test
+Evaluate the relationship between a categorical outcome and a categorical predictor
+by computing the cross tabulation p-value.
+Output a tibble result with with one row per predictor, and four columns:
+\code{name}, \code{score}, \code{predictor}, and \code{outcome}.
+}
+\examples{
+library(titanic)
+titanic_train <- titanic_train |>
+  dplyr::mutate(dplyr::across(c(Survived, Pclass, Sex, Embarked), as.factor))
+titanic_subset <- titanic_train |>
+  dplyr::select(Survived, Pclass, Sex, Age, Fare, Embarked)
+# Return score as -log10(p-values) for chi-squared
+score_obj <- score_cross_tab()
+score_res <- get_scores_cross_tab(
+  score_obj,
+  data = titanic_subset,
+  outcome = "Survived"
+)
+score_res
+# Return score as -log10(p-values) for fisher's
+score_obj <- score_cross_tab(score_type = "pval_fisher")
+score_res <- get_scores_cross_tab(
+  score_obj,
+  data = titanic_subset,
+  outcome = "Survived"
+)
+score_res
+# Return raw p-values instead of -log10(p-values) for chi-squared
+score_obj <- score_cross_tab(
+  score_type = "pval_chisq",
+  neg_log10 = FALSE,
+  direction = "minimize",
+  fallback_value = 0
+)
+score_res <- get_scores_cross_tab(
+  score_obj,
+  data = titanic_subset,
+  outcome = "Survived"
+)
+score_res
 }
